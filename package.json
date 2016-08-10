@@ -6,6 +6,9 @@
   "bin": {
     "nm-cache": "lib/index.js"
   },
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "build": "babel -d lib/ src/ && chmod u+x lib/index.js",
     "prepublish": "npm run build"
