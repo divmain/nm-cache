@@ -2,17 +2,22 @@
   "name": "nm-cache",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "bin": {
-    "nm-cache": "src/index.js"
+    "nm-cache": "lib/index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel -d lib/ src/ && chmod u+x lib/index.js",
+    "prepublish": "npm run build"
   },
   "author": "Dale Bustad <dale@divmain.com>",
   "license": "MIT",
   "dependencies": {
     "co": "^4.6.0",
     "yargs": "^4.8.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-preset-nodejs-lts": "^2.0.1"
   }
 }
