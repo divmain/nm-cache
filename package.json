@@ -1,0 +1,18 @@
+{
+  "name": "nm-cache",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "nm-cache": "src/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dale Bustad <dale@divmain.com>",
+  "license": "MIT",
+  "dependencies": {
+    "co": "^4.6.0",
+    "yargs": "^4.8.1"
+  }
+}
