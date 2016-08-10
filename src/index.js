@@ -35,8 +35,14 @@ const wrap = genFn => co(genFn).catch(err => {
 
 yargs
   .strict()
-  .usage(`Usage: $0 <command> [options]
-This is where additional information will go.`)
+  .usage(`Usage: nm-cache <command> [options]
+
+  This utility helps you stash particular versions of your node_modules
+  directories with minimal overhead.  Later you can restore them.
+
+  This can be useful when, for example, you switch between branches that have
+  different dependencies or versions, or if you need to switch between Node
+  run-time versions.`)
   .option("package-json", {
     describe: "`package.json` to use as node_modules anchor point (optional)."
   })
@@ -46,7 +52,7 @@ This is where additional information will go.`)
   .option("hash", {
     describe: "Indicates which cached directory to restore (optional)."
   })
-  .command("save", "Take a snapshot of your current node_modules, anchored to package.json", ({ argv: { packageJson, force } }) => {
+  .command("save", "Save a snapshot of your current node_modules.", ({ argv: { packageJson, force } }) => {
     wrap(function* () {
       yield init();
       packageJson = getPackageJson(packageJson);
@@ -71,6 +77,6 @@ This is where additional information will go.`)
     });
   })
   .demand(1, "You must provide a sub-command.")
-  .epilogue("For more information, see INSERT_URL_HERE.")
+  .epilogue("For more info or to report an issue, visit the following URL:\nhttp://github.com/divmain/nm-cache")
   .help("help")
   .parse(process.argv);
