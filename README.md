@@ -38,6 +38,7 @@ Or maybe your `project.json` changes relatively often, but you don't want to che
 git pull origin master
 git diff-tree -r --name-only --no-commit-id HEAD@{1} HEAD | \
     grep --quiet "package.json" && \
+    nm-cache restore || \
     npm install && \
     nm-cache save
 ```
