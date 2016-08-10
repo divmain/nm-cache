@@ -41,7 +41,10 @@ This is where additional information will go.`)
     describe: "`package.json` to use as node_modules anchor point (optional)."
   })
   .option("force", {
-    describe: "Overwrite pre-existing node_modules cache."
+    describe: "Overwrite pre-existing node_modules cache (optional)."
+  })
+  .option("hash", {
+    describe: "Indicates which cached directory to restore (optional)."
   })
   .command("save", "Take a snapshot of your current node_modules, anchored to package.json", ({ argv: { packageJson, force } }) => {
     wrap(function* () {
@@ -51,8 +54,13 @@ This is where additional information will go.`)
       yield save(path.dirname(packageJson), hash, force);
     });
   })
-  .command("restore", "Restore a saved snapshot, anchored to package.json", ({ argv }) => {
-    console.log("restore", argv);
+  .command("restore", "Restore a saved snapshot, anchored to package.json", ({ argv: { packageJson } }) => {
+    wrap(function* () {
+      yield init();
+      packageJson = getPackageJson(packageJson);
+      const hash = yield getHash(packageJson);
+      yield restore(path.dirname(packageJson), hash);
+    });
   })
   .command("check", "Exit with 0 if already cached, exit with 1 otherwise.", ({ argv: { packageJson } }) => {
     wrap(function* () {
